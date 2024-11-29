@@ -1,0 +1,112 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
+
+
+import Person.Account;
+import Person.Person;
+import Person.Role;
+import Person.Status;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+public class AccountSettingsController  {
+
+    @FXML
+    private Label ID;
+    @FXML
+    private Label mail;
+    @FXML
+    private Label phone;
+     private Person person;
+    @FXML
+    private TextField newEmailField;
+    @FXML
+    private TextField newPhoneField;
+    @FXML
+    private TextField textpassword;
+    @FXML
+    private VBox id10;
+    
+     public void initialize(Person person) {
+        this.person = person;
+        ID.setText(String.valueOf(person.getId()));
+        mail.setText(person.getMail());
+        phone.setText(String.valueOf(person.getPhoneNumber()));
+        
+    }   
+    @FXML
+    private void resetpassword(ActionEvent event) {
+        String newpassword = textpassword.getText();
+        
+        if (newpassword != null && !newpassword.isEmpty()) {
+            person.setMail(newpassword);
+            mail.setText(newpassword);  
+            showAlert("Success", "password has been successfully reset.");
+        } else {
+            showAlert("Error", "Please enter a valid password.");
+        }
+    }
+    @FXML
+    private void resetmail(ActionEvent event) {
+            String newEmail = newEmailField.getText();
+        
+        if (newEmail != null && !newEmail.isEmpty()) {
+            person.setMail(newEmail);
+            mail.setText(newEmail);  
+            showAlert("Success", "Email has been successfully reset.");
+        } else {
+            showAlert("Error", "Please enter a valid email.");
+        }
+    }
+    @FXML
+    private void resetphone(ActionEvent event) {
+        String phoneText = newPhoneField.getText();
+        
+        try {
+            int newPhoneNumber = Integer.parseInt(phoneText);  
+            person.setPhoneNum(newPhoneNumber);
+            phone.setText(String.valueOf(newPhoneNumber)); 
+            showAlert("Success", "Phone number has been successfully reset.");
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Please enter a valid phone number.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    @FXML
+    private void clickreturn(ActionEvent event) {
+    try {
+            Stage currentStage = (Stage) id10.getScene().getWindow(); 
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewAdminMenu.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Admin Menu");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, e);
+
+        }
+    }  
+}

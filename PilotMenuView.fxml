@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="id4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PiloteMenuViewController">
+   <children>
+      <HBox alignment="CENTER_LEFT" onDragDetected="#accountsettings" prefHeight="60.0" prefWidth="580.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" text="Account Settings" />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#checkArrivals" prefHeight="31.0" prefWidth="150.0" text="Arrivals Flights" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="78.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#checkPast" prefHeight="33.0" prefWidth="150.0" text="Past Flights" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#checkCanceled" prefHeight="30.0" prefWidth="150.0" text="Canceled Flights" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="66.0" prefWidth="600.0">
+         <children>
+            <ToggleButton mnemonicParsing="false" onAction="#checkModify" prefHeight="30.0" prefWidth="150.0" text="Modify" />
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#checkreturn" text="return" textAlignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>
