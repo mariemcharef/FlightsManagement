@@ -21,7 +21,6 @@ public class Flight {
     public Airport departure_airport;
     public Airport arrival_airport;
     public float duration;
-    public int id;
     public LocalDateTime departure_time;
     Status status;//programmé,retardé ou en vol
     
