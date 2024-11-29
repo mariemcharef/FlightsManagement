@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="FlightsManagementController" spacing="10" style="-fx-padding: 20;">
+    <children>
+        <Label text="Flight Management System" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <!-- TableView for displaying flights -->
+        <TableView fx:id="flightTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="numberColumn" text="Flight Number" />
+                <TableColumn fx:id="departureColumn" text="Departure Airport" />
+                <TableColumn fx:id="arrivalColumn" text="Arrival Airport" />
+                <TableColumn fx:id="statusColumn" text="Status" />
+            </columns>
+        </TableView>
+
+        <!-- Input fields and buttons -->
+        <HBox spacing="10">
+            <TextField fx:id="flightNumberField" promptText="Flight Number" />
+            <TextField fx:id="departureField" promptText="Departure Airport" />
+            <TextField fx:id="arrivalField" promptText="Arrival Airport" />
+            <TextField fx:id="statusField" promptText="Status (Scheduled, Delayed)" />
+            <Button text="Add Flight" onAction="#handleAddFlight" />
+        </HBox>
+
+        <!-- Filter section -->
+        <HBox spacing="10">
+            <TextField fx:id="statusFilterField" promptText="Filter by Status" />
+            <Button text="Filter" onAction="#handleFilterByStatus" />
+            <Button text="Reset Table" onAction="#handleResetTable" />
+        </HBox>
+    </children>
+</VBox>
