@@ -25,12 +25,11 @@ public class Flight {
     Status status;//programmé,retardé ou en vol
     
 
-    public Flight(int number, Airport departure_airport, Airport arrival_airport, float duration) {
+    public Flight(int number, Airport departure_airport, Airport arrival_airport, Status s) {
         this.number = number;
         this.departure_airport = departure_airport;
         this.arrival_airport = arrival_airport;
-        this.duration = duration;
-         
+        this.status = s;   
     }
 
     public int getNumber() {
@@ -65,14 +64,6 @@ public class Flight {
         this.duration = duration;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public LocalDateTime getDeparture_time() {
         return departure_time;
     }
@@ -95,11 +86,7 @@ public class Flight {
         return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", id=" + id + ", departure_time=" + departure_time + ", status=" + status + '}';
     }
    
-   
-    
-    
-   
-    
+ 
 }
 
 
