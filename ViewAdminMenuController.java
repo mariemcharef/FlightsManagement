@@ -29,6 +29,18 @@ public class ViewAdminMenuController implements Initializable {
 
     @FXML
     private void flightManagement(ActionEvent event) {
+        try{           
+            
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FlightsManagement.fxml"));
+        Parent root = loader.load();
+
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.setTitle("Flights");
+        st.show();
+    } catch (IOException ex) {
+        Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     @FXML
@@ -76,19 +88,20 @@ public class ViewAdminMenuController implements Initializable {
             stage.show();
     } catch (IOException e) {
         Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, e);
-        
     } 
     }
 
     @FXML
     private void accountsettings(ActionEvent event) {
         try{           
-            id2.getScene().getWindow().hide();
-                Stage st = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("AccountSettings.fxml"));
-                st.setScene(new Scene(root));
-                st.setTitle("Settings");
-                st.show();
+            
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountSettings.fxml"));
+        Parent root = loader.load();
+
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.setTitle("Settings");
+        st.show();
     } catch (IOException ex) {
         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
     }
