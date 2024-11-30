@@ -17,19 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author MARIEM
- */
+
 public class CrewMenuViewController implements Initializable {
 
     @FXML
     private VBox id5;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -37,6 +30,18 @@ public class CrewMenuViewController implements Initializable {
 
     @FXML
     private void clickFlights(ActionEvent event) {
+        try{           
+            
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FlightsManagement.fxml"));
+        Parent root = loader.load();
+
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.setTitle("Flights");
+        st.show();
+    } catch (IOException ex) {
+        Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     @FXML
@@ -63,6 +68,19 @@ public class CrewMenuViewController implements Initializable {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, e);
 
         }
+    }
+    @FXML
+    private void accountsettings(ActionEvent event) {
+        try{           
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountSettings.fxml"));
+        Parent root = loader.load();
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.setTitle("Settings");
+                st.show();
+    } catch (IOException ex) {
+        Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
     
 }
