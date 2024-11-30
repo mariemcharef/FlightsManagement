@@ -50,7 +50,6 @@ public class AccountSettingsController  {
     @FXML
     private void resetpassword(ActionEvent event) {
         String newpassword = textpassword.getText();
-        
         if (newpassword != null && !newpassword.isEmpty()) {
             person.setMail(newpassword);
             mail.setText(newpassword);  
@@ -84,7 +83,6 @@ public class AccountSettingsController  {
             showAlert("Error", "Please enter a valid phone number.");
         }
     }
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -92,21 +90,5 @@ public class AccountSettingsController  {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-    private void clickreturn(ActionEvent event) {
-    try {
-            Stage currentStage = (Stage) id10.getScene().getWindow(); 
-            currentStage.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewAdminMenu.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Admin Menu");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, e);
-
-        }
-    }  
+    
 }
