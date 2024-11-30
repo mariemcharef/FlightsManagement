@@ -22,16 +22,17 @@ public class Flight {
     public Airport arrival_airport;
     public float duration;
     public LocalDateTime departure_time;
-    Status status;//programmé,retardé ou en vol
-    
+    FlightStatus status;//programmé,retardé ou en vol
 
-    public Flight(int number, Airport departure_airport, Airport arrival_airport, Status s) {
+    public Flight(int number, Airport departure_airport, Airport arrival_airport, float duration, LocalDateTime departure_time, FlightStatus status) {
         this.number = number;
         this.departure_airport = departure_airport;
         this.arrival_airport = arrival_airport;
-        this.status = s;   
+        this.duration = duration;
+        this.departure_time = departure_time;
+        this.status = status;
     }
-
+    
     public int getNumber() {
         return number;
     }
@@ -72,19 +73,21 @@ public class Flight {
         this.departure_time = departure_time;
     }
 
-    public Status getStatus() {
+    public FlightStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(FlightStatus status) {
         this.status = status;
     }
-    
 
     @Override
     public String toString() {
-        return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", id=" + id + ", departure_time=" + departure_time + ", status=" + status + '}';
+        return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", departure_time=" + departure_time + ", status=" + status + '}';
     }
+    
+
+    
    
  
 }
