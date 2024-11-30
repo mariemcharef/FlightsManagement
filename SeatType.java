@@ -8,9 +8,8 @@ package AirCraft;
  *
  * @author moham
  */
-public enum Status {
-    WORKING,
-    OLD,
-    BROKEN,
-    REFACTORING,
+public enum SeatType {
+    ECONOMY,
+    BUSINESS,
+    
 }
