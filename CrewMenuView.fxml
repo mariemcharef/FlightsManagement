@@ -10,7 +10,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="600.0">
          <children>
-            <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="114.0" text="Account Settings" />
+            <ToggleButton mnemonicParsing="false" onAction="#accountsettings" prefHeight="30.0" prefWidth="114.0" text="Account Settings" />
          </children>
          <VBox.margin>
             <Insets left="20.0" />
