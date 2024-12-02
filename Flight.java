@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.fligths;
+package com.mycompany.flights;
 
 /**
  *
- * @author MARIEM
+ * @author moham
  */
+import AirCraft.AirCraft;
+import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,22 +19,31 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Flight {
-    public int number;
-    public Airport departure_airport;
-    public Airport arrival_airport;
-    public float duration;
-    public LocalDateTime departure_time;
-    FlightStatus status;//programmé,retardé ou en vol
+    private int number;
+    private Airport departure_airport;
+    private Airport arrival_airport;
+    private float duration;
+    private LocalDateTime departure_time;
+    private FlightStatus status;//programmé,retardé ou en vol
+    private AirCraft airCaft;    // each Flight has 1 and only 1 aircraft assigned to it 
+    
 
-    public Flight(int number, Airport departure_airport, Airport arrival_airport, float duration, LocalDateTime departure_time, FlightStatus status) {
+    public Flight(int number, Airport departure_airport, Airport arrival_airport, FlightStatus s) {
         this.number = number;
         this.departure_airport = departure_airport;
         this.arrival_airport = arrival_airport;
-        this.duration = duration;
-        this.departure_time = departure_time;
-        this.status = status;
+        this.status = s;   
     }
     
+    /*
+    Im going to assign an aircraft for the flight
+    but i have to add an exception which is that 
+    only allows  to assign the aircraft from the 
+    list of aircrafts that they already exists.
+    */
+    public void setAirCraft(AirCraft airCraft){
+        this.airCaft = airCraft;
+    }
     public int getNumber() {
         return number;
     }
@@ -83,13 +94,13 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", departure_time=" + departure_time + ", status=" + status + '}';
+        return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", departure_time=" + departure_time + ", status=" + status + ", airCaft=" + airCaft + '}';
     }
     
 
     
-   
  
 }
-
+   
+ 
 
