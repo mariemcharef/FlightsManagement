@@ -22,10 +22,11 @@ public class FlightSeat extends Seat{
     private String resevationNumber;
     private Flight flight;
     
-    public FlightSeat(float price, String reservationNumber,int seatNumber, SeatType seatType, SeatAvailability seatAvailability){
+    public FlightSeat(int seatNumber, SeatType seatType, SeatAvailability seatAvailability,float price, String reservationNumber,Flight flight){
         super(seatNumber, seatType, seatAvailability);
         this.price = price;
         this.resevationNumber = reservationNumber;
+        this.flight = flight;
         
     }
 
