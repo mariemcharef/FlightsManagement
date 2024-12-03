@@ -26,9 +26,8 @@ public class FlightReservation {
         passengersFlightSeat = new HashMap<>();
     }
     //If we want to add a reservation for a passenger that doesnt belong to the this flight we have to rase an exception
-    public void addFlightReservation(Passenger passenger) throws AvailabilityException {
-       if(passenger.getFlightSeat().getFlight() != this.getFlight())
-           throw new AvailabilityException("Passenger belongs to another flight !");
+    public void addFlightReservation(Passenger passenger)  {
+      
        passengersFlightSeat.put(passenger, passenger.getFlightSeat());
     }
     public String getFlightReservationNumber() {
@@ -57,7 +56,7 @@ public class FlightReservation {
 
     @Override
     public String toString() {
-        return "FlightReservation{" + "flightReservationNumber=" + flightReservationNumber + ", flight=" + flight + ", passengersFlightSeat=" + passengersFlightSeat + '}';
+        return "FlightReservation{" + "flightReservationNumber=" + flightReservationNumber + ", flights=" + flight + ", passengersFlightSeat=" + passengersFlightSeat + '}';
     }
 
         
