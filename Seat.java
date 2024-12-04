@@ -14,7 +14,7 @@ import java.util.EnumSet;
  * Each seat has: 
  *  seat type = {business , economy } 
  *  seatAvailabliity = {available, inavalable}
- *  and correspond to a certain aircraft
+ *  and corresponds to an aircraft 
  * 
  * 
  */
@@ -32,21 +32,25 @@ public class Seat {
     public AirCraft getAircraft() {
         return aircraft;
     }
-    
-   public Seat(int seatNumber, SeatType seatType, SeatAvailability seatAvailability) {
-    if (seatNumber < 0) {
-        throw new IllegalArgumentException("Seat Number must be positive");
-    }
-    if (seatType == null) {
-        throw new IllegalArgumentException("Seat Type must be BUSINESS or ECONOMY");
-    }
-    if (seatAvailability == null) {
-        throw new IllegalArgumentException("Seat Availability must be AVAILABLE or INAVAILABLE");
-    }
 
-    this.seatNumber = seatNumber;
-    this.seatType = seatType;
-    this.seatAvailability = seatAvailability;
+    public void setSeatAvailability(SeatAvailability seatAvailability) {
+        this.seatAvailability = seatAvailability;
+    }
+    
+    public Seat(int seatNumber, SeatType seatType, SeatAvailability seatAvailability) {
+        if (seatNumber < 0) {
+            throw new IllegalArgumentException("Seat Number must be positive");
+        }
+        if (seatType == null) {
+            throw new IllegalArgumentException("Seat Type must be BUSINESS or ECONOMY");
+        }
+        if (seatAvailability == null) {
+            throw new IllegalArgumentException("Seat Availability must be AVAILABLE or INAVAILABLE");
+        }
+
+        this.seatNumber = seatNumber;
+        this.seatType = seatType;
+        this.seatAvailability = seatAvailability;
 }
 
     public int getSeatNumber() {
