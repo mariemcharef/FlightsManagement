@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+import Person.Person;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,19 +19,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author MARIEM
- */
+
 public class PiloteMenuViewController implements Initializable {
 
     @FXML
     private VBox id4;
-
-    /**
-     * Initializes the controller class.
-     */
+    private Person person;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -70,9 +65,26 @@ public class PiloteMenuViewController implements Initializable {
     }
     }
 
-    @FXML
-    private void accountsettings(MouseEvent event) {
-        
-    }
     
-}
+     public void setPerson(Person person) {
+        this.person = person;
+     }
+    @FXML
+    private void accountsettings(ActionEvent event) {
+        try{     
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountSettings.fxml"));
+        Parent root = loader.load();
+        AccountSettingsController controller = loader.getController();
+        controller.setPerson(person);  // Set person data to the AccountSettingsController
+        Stage st = new Stage();
+        st.setScene(new Scene(root));
+        st.setTitle("Settings");
+        st.show();
+        
+    } catch (IOException ex) {
+        Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+ }
+    
+
