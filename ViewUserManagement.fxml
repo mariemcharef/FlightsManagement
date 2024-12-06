@@ -9,18 +9,18 @@
 
 <AnchorPane fx:id="id8" prefHeight="563.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserManagementController">
     <VBox alignment="CENTER" layoutX="50.0" layoutY="25.0" spacing="10" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.799999999999955" AnchorPane.topAnchor="25.0">
-        <Button fx:id="viewAccountsButton" text="View Accounts" />
-        <Button fx:id="addAccountButton" text="Add Account" />
-        <Button fx:id="modifyAccountButton" text="Modify Account" />
-        <Button fx:id="deleteAccountButton" text="Delete Account" />
-        <Button fx:id="cancelButton" text="Cancel" />
+        <Button fx:id="viewPersons" onAction="#viewPersons" text="View Accounts" />
+        <Button fx:id="addPerson" onAction="#addPerson" text="Add Account" />
+        <Button fx:id="modifyPerson" onAction="#modifyPerson" text="Modify Account" />
+        <Button fx:id="deletePerson" onAction="#deletePerson" text="Delete Account" />
+        <Button fx:id="cancelButton" onAction="#cancelButton" text="Cancel" />
         
         <TextField fx:id="textName" promptText="Name" />
         <TextField fx:id="textAddress" promptText="Address" />
         <TextField fx:id="textMail" promptText="Email" />
         <TextField fx:id="textPhone" promptText="Phone" />
         
-        <ComboBox fx:id="roleComboBox" promptText="Select Role" />
+        <ComboBox fx:id="roleComboBox" onAction="#roleComboBox" promptText="Select Role" />
         <ListView fx:id="accountsListView" prefHeight="200" prefWidth="300" />
         <Button fx:id="returnButton" onAction="#handleReturnButton" text="Return" />
     </VBox>
