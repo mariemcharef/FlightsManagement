@@ -1,4 +1,5 @@
 import Person.Account;
+import Person.Person;
 import Person.Role;
 import Person.Status;
 import java.io.IOException;
@@ -20,16 +21,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 public class UserManagementController {
-
-    @FXML
     private Button viewAccountsButton;
-    @FXML
     private Button addAccountButton;
-    @FXML
     private Button modifyAccountButton;
-    @FXML
     private Button deleteAccountButton;
     @FXML
     private Button cancelButton;
@@ -44,96 +39,123 @@ public class UserManagementController {
     private TextField textPhone;
     @FXML
     private Button returnButton;
-
     @FXML
     private ComboBox<String> roleComboBox;
-
     @FXML
     private ListView<String> accountsListView;
-
     @FXML
     private AnchorPane id8;
-
-    private ObservableList<String> accountsList;
-    private ObservableList<Account> accounts = FXCollections.observableArrayList();
-
+    private ObservableList<String> accountsList= FXCollections.observableArrayList();//display as String
+    private ObservableList<Person> persons=FXCollections.observableArrayList();//save as Person type 
+    @FXML
+    private Button viewPersons;
+    @FXML
+    private Button addPerson;
+    @FXML
+    private Button modifyPerson;
+    @FXML
+    private Button deletePerson;
     @FXML
     private void initialize() {
-        viewAccountsButton.setOnAction(this::viewAccounts);
-        addAccountButton.setOnAction(this::addAccount);
-        modifyAccountButton.setOnAction(this::modifyAccount);
-        deleteAccountButton.setOnAction(this::deleteAccount);
+        viewPersons.setOnAction(this::viewPersons);
+        addPerson.setOnAction(this::addPerson);
+        modifyPerson.setOnAction(this::modifyPerson);
+        deletePerson.setOnAction(this::deletePerson);
         cancelButton.setOnAction(this::cancelAction);
-
         roleComboBox.getItems().addAll("Admin", "Crew", "Pilot");
-
         accountsList = FXCollections.observableArrayList();
         accountsListView.setItems(accountsList);
+        accountsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    });
+ }
+    @FXML
+    private void viewPersons(ActionEvent event) {//display persons 
+    accountsList.clear();
+    for (Person person : test.persons) {
+        accountsList.add(person.toString());
     }
-
-    private void viewAccounts(ActionEvent event) {
-        accountsList.clear();
-        for (Account account : accounts) {
-            accountsList.add(account.toString());
-        }
+}
+    @FXML
+    private void addPerson(ActionEvent event) {
+    if (validateInputs()) {
+        Random random = new Random();
+        int id=1;
+        id = random.nextInt(10000);
+       /* do {
+            id = random.nextInt(10000);
+        } while (test.persons.stream().anyMatch(p -> p.getId() == id));
+*/
+        Account account = new Account(id, "123", Status.ACTIVE, getRole1());
+        Person person = new Person(
+            id,
+            textName.getText(),
+            textAddress.getText(),
+            textMail.getText(),
+            Integer.parseInt(textPhone.getText()),
+            account
+        );
+        test.persons.add(person);
+        persons.add(person);
+        accountsList.add("Nom: " + person.getId());
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Person added successfully!\nID: " + id);
+        viewPersons(null);
     }
-
-    private void addAccount(ActionEvent event) {
-        if (validateInputs()) {
-            Random random = new Random();
-            int id = random.nextInt(10000);
-
-            Account account = new Account(id, "123", getStatus(), getRole1());
-            accounts.add(account);
-
-            showAlert(AlertType.INFORMATION, "Success", "Account added successfully!\nID: " + id + "\nPassword: 123");
-            viewAccounts(null);
-        }
+}
+    private TextField getName(){
+        return textName;
     }
-
-    private void modifyAccount(ActionEvent event) {
-        if (accountsListView.getSelectionModel().getSelectedItem() != null) {
-            String selectedAccount = accountsListView.getSelectionModel().getSelectedItem();
-            int accountId = Integer.parseInt(selectedAccount.split(":")[1].trim());
-
-            Account accountToModify = null;
-            for (Account account : accounts) {
-                if (account.getId() == accountId) {
-                    accountToModify = account;
-                    break;
-                }
-            }
-
-            if (accountToModify != null) {
-                accountToModify.setRole(getRole1());
-                showAlert(AlertType.INFORMATION, "Success", "Account modified successfully!");
-                viewAccounts(null);
-            } else {
-                showAlert(AlertType.ERROR, "Error", "Account not found.");
-            }
-        } else {
-            showAlert(AlertType.WARNING, "Selection", "Please select an account to modify.");
-        }
+    private TextField getPhone(){
+        return textPhone;
     }
-
-    private void deleteAccount(ActionEvent event) {
-        if (accountsListView.getSelectionModel().getSelectedItem() != null) {
-            String selectedAccount = accountsListView.getSelectionModel().getSelectedItem();
-            int accountId = Integer.parseInt(selectedAccount.split(":")[1].trim());
-
-            accounts.removeIf(account -> account.getId() == accountId);
-
-            showAlert(AlertType.INFORMATION, "Success", "Account deleted successfully!");
-            viewAccounts(null);
-        } else {
-            showAlert(AlertType.WARNING, "Selection", "Please select an account to delete.");
-        }
+    private TextField getMail(){
+        return textMail;
     }
+    private TextField getAdress(){
+        return textAddress;
+    }
+@FXML
+private void modifyPerson(ActionEvent event) {
+    String selectedPerson = accountsListView.getSelectionModel().getSelectedItem(); 
+    if (selectedPerson == null ||selectedPerson.isBlank()) {
+        showAlert(Alert.AlertType.WARNING, "Selection", "No person selected.");
+        return;
+    }
+    Person personToModify = test.persons.stream()
+            .filter(p -> selectedPerson.equals(p.toString()))
+            .findFirst()
+            .orElse(null);
+    if (personToModify != null) {
+        personToModify.setNom(textName.getText());
+        personToModify.setAddress(textAddress.getText());
+        personToModify.setMail(textMail.getText());
+        personToModify.setPhoneNum(Integer.parseInt(textPhone.getText()));
+        personToModify.getAccount().setRole(getRole1());
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Person modified successfully!");
+        viewPersons(null);  
+    } else {
+        showAlert(Alert.AlertType.ERROR, "Error", "Person not found.");
+    }
+}
+    @FXML
 
+private void deletePerson(ActionEvent event) {
+    String selected = accountsListView.getSelectionModel().getSelectedItem();  
+    if (selected == null || selected.isBlank()) {
+        showAlert(Alert.AlertType.WARNING, "Sélection", "Aucune personne sélectionnée.");
+        return;  
+    }
+    boolean removed = test.persons.removeIf(p -> selected.equals(p.toString()));
+    if (removed) {
+        showAlert(Alert.AlertType.INFORMATION, "Succès", "La personne a été supprimée avec succès !");
+        viewPersons(null);  
+    } else {
+        showAlert(Alert.AlertType.ERROR, "Erreur", "La personne n'a pas été trouvée.");
+    }
+}
+    @FXML
     private void cancelAction(ActionEvent event) {
         showAlert(AlertType.INFORMATION, "Cancelled", "Action cancelled.");
     }
-
     private boolean validateInputs() {
         if (textName.getText().isEmpty() || textAddress.getText().isEmpty() || textMail.getText().isEmpty() || textPhone.getText().isEmpty()) {
             showAlert(AlertType.WARNING, "Error", "All fields must be filled.");
@@ -141,7 +163,9 @@ public class UserManagementController {
         }
         return true;
     }
-
+    private int generateUniqueId() {
+        return test.persons.stream().mapToInt(Person::getId).max().orElse(0) + 1;
+    }
     private Role getRole1() {
         String role = roleComboBox.getSelectionModel().getSelectedItem();
         if ("Admin".equals(role)) return Role.Admin;
@@ -149,11 +173,9 @@ public class UserManagementController {
         if ("Pilot".equals(role)) return Role.Pilot;
         return null;
     }
-
     private Status getStatus() {
         return Status.ACTIVE;
     }
-
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -161,7 +183,6 @@ public class UserManagementController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     @FXML
     private void handleReturnButton(ActionEvent event) {
         try {
@@ -177,5 +198,14 @@ public class UserManagementController {
         } catch (IOException e) {
             Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    @FXML
+    private void cancelButton(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Cancelled", "Action cancelled.");
+    }
+
+    @FXML
+    private void roleComboBox(ActionEvent event) {
     }
 }
