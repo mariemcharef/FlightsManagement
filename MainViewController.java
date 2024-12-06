@@ -24,11 +24,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author MARIEM
- */
 public class MainViewController implements Initializable {
     public static Role r;
     @FXML
