@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+import Person.Account;
+import Person.Person;
+import Person.Role;
+import static Person.Role.Crew;
+import Person.Status;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,12 +27,15 @@ public class CrewMenuViewController implements Initializable {
 
     @FXML
     private VBox id5;
-
+    private Person person; 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }  
+    public void setPerson(Person person) {
+        this.person = person;
+        
+    }
     @FXML
     private void clickFlights(ActionEvent event) {
         try{           
@@ -45,11 +53,11 @@ public class CrewMenuViewController implements Initializable {
     }
 
     @FXML
-    private void clickReservation(ActionEvent event) {
+    private void clickReservation(ActionEvent event) {//bech yheznu lel view eli bech ya3melha bouafif
     }
 
     @FXML
-    private void clickPassagers(ActionEvent event) {
+    private void clickPassagers(ActionEvent event) {//bech yheznu lel view eli bech ya3melha bouafif
     }
 
     @FXML
@@ -59,25 +67,26 @@ public class CrewMenuViewController implements Initializable {
             currentStage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setTitle("Home");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, e);
-
         }
     }
     @FXML
     private void accountsettings(ActionEvent event) {
-        try{           
+        try{     
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountSettings.fxml"));
         Parent root = loader.load();
+        AccountSettingsController controller = loader.getController();
+        controller.setPerson(person);  // Set person data to the AccountSettingsController
         Stage st = new Stage();
         st.setScene(new Scene(root));
         st.setTitle("Settings");
-                st.show();
+        st.show();
+        
     } catch (IOException ex) {
         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
     }
