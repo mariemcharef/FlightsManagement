@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
 
 import Person.Account;
+import Person.Admin;
 import Person.Person;
 import Person.Role;
 import Person.Status;
@@ -39,20 +35,22 @@ public class AccountSettingsController  {
     private TextField textpassword;
     @FXML
     private VBox id10;
-    
-     public void initialize(Person person) {
+     public void setPerson(Person person) {
         this.person = person;
-        ID.setText(String.valueOf(person.getId()));
-        mail.setText(person.getMail());
-        phone.setText(String.valueOf(person.getPhoneNumber()));
-        
-    }   
+        updateFields();
+    }
+    private void updateFields() {
+        if (person != null) {
+            ID.setText(String.valueOf(person.getId()));
+            mail.setText(person.getMail());
+            phone.setText(String.valueOf(person.getPhoneNumber()));
+        }
+    }
     @FXML
-    private void resetpassword(ActionEvent event) {
+    public void resetpassword(ActionEvent event) {
         String newpassword = textpassword.getText();
         if (newpassword != null && !newpassword.isEmpty()) {
-            person.setMail(newpassword);
-            mail.setText(newpassword);  
+            person.setpassword(newpassword);  
             showAlert("Success", "password has been successfully reset.");
         } else {
             showAlert("Error", "Please enter a valid password.");
@@ -73,7 +71,6 @@ public class AccountSettingsController  {
     @FXML
     private void resetphone(ActionEvent event) {
         String phoneText = newPhoneField.getText();
-        
         try {
             int newPhoneNumber = Integer.parseInt(phoneText);  
             person.setPhoneNum(newPhoneNumber);
@@ -89,6 +86,5 @@ public class AccountSettingsController  {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-    
+    }   
 }
