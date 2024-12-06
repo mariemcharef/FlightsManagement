@@ -1,4 +1,5 @@
 
+import Person.Person;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,13 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
 public class ViewAdminMenuController implements Initializable {
 
     @FXML
     private VBox id2;
-
+    private Person person;
     /**
      * Initializes the controller class.
      */
@@ -26,7 +25,9 @@ public class ViewAdminMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+     public void setPerson(Person person) {
+        this.person = person;
+     }
     @FXML
     private void flightManagement(ActionEvent event) {
         try{           
@@ -92,21 +93,22 @@ public class ViewAdminMenuController implements Initializable {
     }
 
     @FXML
-    private void accountsettings(ActionEvent event) {
-        try{           
-            
+     private void accountsettings(ActionEvent event) {
+        try{     
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountSettings.fxml"));
         Parent root = loader.load();
-
+        AccountSettingsController controller = loader.getController();
+        controller.setPerson(person);  // Set person data to the AccountSettingsController
         Stage st = new Stage();
         st.setScene(new Scene(root));
         st.setTitle("Settings");
         st.show();
+        
     } catch (IOException ex) {
         Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
     
-    
+
 }
