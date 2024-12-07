@@ -9,6 +9,8 @@ package com.mycompany.flights;
  * @author moham
  */
 import AirCraft.AirCraft;
+import com.mycompany.flights.Airport;
+import com.mycompany.flights.FlightStatus;
 import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,6 +48,10 @@ public class Flight {
     }
     public int getNumber() {
         return number;
+    }
+
+    public AirCraft getAirCaft() {
+        return airCaft;
     }
 
     public void setNumber(int number) {
@@ -91,10 +97,19 @@ public class Flight {
     public void setStatus(FlightStatus status) {
         this.status = status;
     }
-
+    public String getAssignedAircraft() {
+        return this.airCaft.getName();
+    }
+    public void setAssignedAirCraft(String s){
+        this.airCaft.setName(s);
+    }
     @Override
     public String toString() {
         return "Flight{" + "number=" + number + ", departure_airport=" + departure_airport + ", arrival_airport=" + arrival_airport + ", duration=" + duration + ", departure_time=" + departure_time + ", status=" + status + ", airCaft=" + airCaft + '}';
+    }
+
+    public void setAssignedAircraft(String selectedAircraft) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
@@ -103,4 +118,3 @@ public class Flight {
 }
    
  
-
