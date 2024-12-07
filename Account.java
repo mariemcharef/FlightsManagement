@@ -10,7 +10,6 @@ public class Account implements VerifLogin{
     public String password;
     private Status status;
     private Role role;
-
     public Account(int id, String password, Status status, Role role) {
         this.id = id;
         this.password = password;
