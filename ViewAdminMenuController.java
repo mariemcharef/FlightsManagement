@@ -66,9 +66,6 @@ public class ViewAdminMenuController implements Initializable {
     }
     }
 
-    @FXML
-    private void notificationManagement(ActionEvent event) {
-    }
 
     @FXML
     private void paiementManagement(ActionEvent event) {
