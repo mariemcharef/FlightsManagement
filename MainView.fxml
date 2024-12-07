@@ -21,14 +21,14 @@
       </Label>
       <ImageView fitHeight="289.0" fitWidth="342.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/images%201111111111111111.jpg" />
+            <Image url="@/flight.jpg" />
          </image>
       </ImageView>
       <HBox alignment="CENTER" cache="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="71.0" prefWidth="488.0" spacing="20.0">
          <children>
-            <Button fx:id="logPilote" mnemonicParsing="false" onAction="#logaspilote" prefHeight="26.0" prefWidth="121.0" text="Log in as pilote" />
-            <Button fx:id="logCrew" mnemonicParsing="false" onAction="#logascrew" prefHeight="26.0" prefWidth="122.0" text="Log in as crew" />
-            <Button fx:id="logAdmin" mnemonicParsing="false" onAction="#logasadmin" prefHeight="26.0" prefWidth="126.0" text="Log in as admin " />
+            <Button fx:id="logPilote" mnemonicParsing="false" onAction="#logaspilote" prefHeight="26.0" prefWidth="121.0"  style="-fx-background-color: #082032; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 10px; -fx-padding: 10px;"  text="Log in as pilote" textFill="WHITE" />
+            <Button fx:id="logCrew" mnemonicParsing="false" onAction="#logascrew" prefHeight="26.0" prefWidth="122.0"  style="-fx-background-color: #1e2a47; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 10px; -fx-padding: 10px;" text="Log in as crew" />
+            <Button fx:id="logAdmin" mnemonicParsing="false" onAction="#logasadmin" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #4c6a91; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 10px; -fx-padding: 10px;" text="Log in as admin " />
          </children>
       </HBox>
    </children>
