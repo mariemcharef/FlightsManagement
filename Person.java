@@ -1,6 +1,7 @@
 
 package Person;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public sealed class Person permits Admin ,Crew ,Pilot{
@@ -19,7 +20,7 @@ public sealed class Person permits Admin ,Crew ,Pilot{
         this.phoneNumber = phoneNumber;
         this.account=account;
     }
-    public Account getCompte() {
+    public Account getAccount() {
         return account;
     }
     public int getId() {
@@ -29,7 +30,9 @@ public sealed class Person permits Admin ,Crew ,Pilot{
     public String getNom() {
         return nom;
     }
-
+    public void setpassword(String p){
+        account.setPassword(p);
+    }
     public String getAddress() {
         return address;
     }
@@ -66,6 +69,19 @@ public sealed class Person permits Admin ,Crew ,Pilot{
     public String toString() {
         return "Person{" + "id=" + id + ", nom=" + nom + ", address=" + address + ", mail=" + mail + ", phoneNum=" + phoneNumber + '}';
     }
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && phoneNumber == person.phoneNumber && Objects.equals(nom, person.nom) &&
+               Objects.equals(address, person.address) && Objects.equals(mail, person.mail) &&
+               Objects.equals(account, person.account);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, address, mail, phoneNumber, account);
+    }
     
 }
