@@ -20,7 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 public class FlightsManagementController {
 
     @FXML
@@ -42,14 +44,13 @@ public class FlightsManagementController {
     @FXML
     private TextField flightNumberField, departureField, arrivalField, statusField, statusFilterField,durationField,departureTimeField,flightSelectionField; 
     @FXML
-    private ComboBox<String> aircraftComboBox; 
-     
+    private ComboBox<String> aircraftComboBox;  
     private final ObservableList<Flight> flightList = FXCollections.observableArrayList();
     private final ObservableList<String> aircraftList = FXCollections.observableArrayList();
     @FXML
     private VBox id11;
     public void initialize() {
-        aircraftList.addAll("Boeing 737", "Airbus A320", "Cessna 172");
+        aircraftList.addAll("Boeing737", "AirbusA320", "Cessna172");
         aircraftComboBox.setItems(aircraftList);
         numberColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNumber()));
         departureColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getDeparture_airport().name()));
@@ -57,6 +58,10 @@ public class FlightsManagementController {
         statusColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getStatus().getDisplayName()));
         timeColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getDeparture_time().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
         durationColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(String.format("%.2f hours", data.getValue().getDuration())));
+        aircraftColumn.setCellValueFactory(data -> {
+            AirCraft aircraft = data.getValue().getAirCaft();
+            return new SimpleObjectProperty<>(aircraft != null ? aircraft.getName() : "Not Assigned");
+        });
         // aircraftColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getAssignedAircraft()));
         flightList.addAll(test.Flights);
         flightTable.setItems(flightList);
@@ -64,7 +69,7 @@ public class FlightsManagementController {
     @FXML
     public void handleAddFlight() {
         try {
-             int number = Integer.parseInt(flightNumberField.getText());
+            int number = Integer.parseInt(flightNumberField.getText());
             String departure = departureField.getText();
             String arrival = arrivalField.getText();
             String statusStr = statusField.getText();
@@ -80,7 +85,7 @@ public class FlightsManagementController {
             newFlight.setDeparture_time(departureTime);
             flightList.add(newFlight);
             test.Flights.add(newFlight);
-             flightTable.refresh();
+            flightTable.refresh();
             clearInputFields();
     } catch (NumberFormatException e) {
         showAlert("Invalid Input", "Please ensure Flight Number and Duration are numbers.");
@@ -91,29 +96,45 @@ public class FlightsManagementController {
     }
     }
     @FXML
-    public void handleAssignAircraftToFlight() {
+public void handleAssignAircraftToFlight() {
     try {
-        String flightNumber = flightSelectionField.getText();
-        String selectedAircraft = aircraftComboBox.getValue();
+        int flightNumber = Integer.parseInt(flightSelectionField.getText());
+        String selectedAircraftName = aircraftComboBox.getSelectionModel().getSelectedItem();//selection
 
+        if (selectedAircraftName == null || selectedAircraftName.isEmpty()) {
+            showAlert("Error", "Please select an aircraft from the drop-down list");
+            return;
+        }
         Flight flight = flightList.stream()
-                .filter(f -> f.getNumber() == Integer.parseInt(flightNumber))
+                .filter(f -> f.getNumber() == flightNumber)
                 .findFirst()
                 .orElse(null);
 
-        if (flight != null && selectedAircraft != null) {
-            flight.setAssignedAircraft(selectedAircraft);
+        if (flight == null) {
+            showAlert("Erreur", "Aucun vol trouvé avec ce numéro.");
+            return;
+        }  
+        AirCraft selectedAircraft=test.Aircraft.stream()
+                .filter(a ->a.getName().equals(selectedAircraftName))
+                .findFirst()
+                .orElse(null);
+        /*if (selectedAircraft == null) {
+            showAlert("Error", ".");
+            return;
+        }*/
+        flight.setAirCraft(selectedAircraft);
+        aircraftList.add(selectedAircraft.getName());
+        flightTable.refresh();
+        
 
-            flightTable.refresh();  
-
-            showAlert("Success", "Aircraft assigned successfully.");
-        } else {
-            showAlert("Error", "Invalid flight number or aircraft selection.");
-        }
+        //showAlert("Success", "The aircraft has been successfully assigned to the flight.");
+    } catch (NumberFormatException e) {
+        showAlert("Error", "Please enter a valid flight number.");
     } catch (Exception e) {
-        showAlert("Error", "An unexpected error occurred.");
+        showAlert("Error", "An unexpected error has occurred.");
     }
 }
+
     @FXML
     public void handleFilterByStatus() {
         String filterStatus = statusFilterField.getText().toUpperCase();
