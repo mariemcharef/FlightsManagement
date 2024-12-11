@@ -3,7 +3,7 @@ import Person.Account;
 import Person.Admin;
 import Person.Person;
 import Person.Role;
-import Person.Status;
+import Person.PersonStatus;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +35,7 @@ public class AccountSettingsController  {
     private TextField textpassword;
     @FXML
     private VBox id10;
+    
      public void setPerson(Person person) {
         this.person = person;
         updateFields();
@@ -58,7 +59,7 @@ public class AccountSettingsController  {
     }
     @FXML
     private void resetmail(ActionEvent event) {
-            String newEmail = newEmailField.getText();
+        String newEmail = newEmailField.getText();
         
         if (newEmail != null && !newEmail.isEmpty()) {
             person.setMail(newEmail);
